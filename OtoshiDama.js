@@ -1,6 +1,5 @@
 <script>
 document.getElementById("giftBtn").addEventListener("click", function () {
-  this.style.display = "none";
-  document.getElementById("ticket").style.display = "block";
+  window.location.href = "https://gift.starbucks.co.jp/c/1766TGSpz2mxhEMSXDO1lW7rv3nOHJAk";
 });
 </script>
