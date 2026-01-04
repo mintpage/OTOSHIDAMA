@@ -9,6 +9,7 @@
 }
 
 body {
+  position: relative;
   background-image: url("S__14295062.jpg");
   background-size: cover;
   background-position: center;
