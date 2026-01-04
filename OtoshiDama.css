@@ -1,41 +1,48 @@
 @import url('https://fonts.googleapis.com/css?family=Sacramento&display=swap');
 
-/* =====================
-   リセット & 共通
-===================== */
+/* ===== リセット ===== */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   font-family: "Hiragino Maru Gothic ProN", sans-serif;
 }
 
-body {
-  position: relative;
-  background-image: url("S__14295062.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 60px;
+html, body {
+  width: 100%;
+  height: 100%;
 }
 
-/* 白いベール */
+/* ===== body ===== */
+body {
+  position: relative;
+
+  /* iPhone / 全ブラウザ対応 */
+  min-height: 100svh;
+  min-height: 100dvh;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: url("S__14295062.jpg") center / cover no-repeat;
+  overflow: hidden;
+}
+
+/* ===== 白いベール ===== */
 body::before {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: rgba(255, 255, 255, 0.35); /* ← 数字で白さ調整 */
+  background: rgba(255,255,255,0.35);
+  z-index: 1;
   pointer-events: none;
 }
 
-/* =====================
-   背景アニメ
-===================== */
+/* ===== 背景アニメ ===== */
 .bg-anim {
+  opacity: 0.2;
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -56,13 +63,11 @@ body::before {
   100% { background-position: 0% 50%; }
 }
 
-/* =====================
-   浮遊エフェクト
-===================== */
+/* ===== 浮遊 ===== */
 .floating {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -84,34 +89,27 @@ body::before {
   to   { transform: translateY(-120svh); opacity: 1; }
 }
 
-/* =====================
-   メインカード
-===================== */
-.card {
-  top: -30px;
-  z-index: 2;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 45px 35px;
-  border-radius: 28px;
-  text-align: center;
-  width: 90%;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+/* ===== 中央コンテンツ ===== */
+.center {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  /* 少し上に */
+  transform: translateY(-30px);
 }
 
-/* =====================
-   タイトル & テキスト
-===================== */
+/* ===== タイトル ===== */
 .title {
-  top: -30px;
   font-family: 'Sacramento', cursive;
-  width: 100%;
-  font-size: -webkit-xxx-large;
-  text-align: center;
+  font-size: clamp(48px, 8vw, 72px);
   color: #ff7fa8;
+  text-align: center;
   animation: fadeUp 1.5s ease forwards;
-  margin-bottom: 10px;
 }
 
 @keyframes fadeUp {
@@ -119,19 +117,30 @@ body::before {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.message {
-  color: #666;
-  margin-bottom: 32px;
+/* ===== カード ===== */
+.card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 40px 32px;
+  border-radius: 28px;
+  width: min(90%, 420px);
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-/* =====================
-   ギフトボタン
-===================== */
+.message {
+  color: #666;
+  margin-bottom: 28px;
+}
+
+/* ===== ボタン ===== */
 #giftBtn {
+  color: #ff7fa8;
   background: linear-gradient(135deg,#8fd3f4,#fbc2eb,#fddb92);
   border: none;
   border-radius: 999px;
-  padding: 15px 32px;
+  padding: 14px 30px;
   font-weight: bold;
   cursor: pointer;
   animation: pulse 2s infinite;
@@ -140,8 +149,8 @@ body::before {
 }
 
 @keyframes pulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
@@ -160,14 +169,12 @@ body::before {
 }
 
 @keyframes shine {
-  0%   { left: -100%; }
-  60%  { left: 100%; }
+  0% { left: -100%; }
+  60% { left: 100%; }
   100% { left: 100%; }
 }
 
-/* =====================
-   動き控えめ設定
-===================== */
+/* ===== 動き控えめ ===== */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
